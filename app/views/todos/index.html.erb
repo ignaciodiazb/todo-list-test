@@ -1,0 +1,65 @@
+<div class="w-full max-w-2xl mx-auto">
+  <div class="flex items-center justify-between mb-8">
+    <div class="flex items-baseline">
+      <h1 class="text-4xl font-bold tracking-tight text-gray-900">Todo List</h1>
+      <% if @total_count > 0 %>
+        <span class="inline-block ml-4 text-sm text-gray-500 font-medium"><%= @completed_count %>/<%= @total_count %> completed</span>
+      <% end %>
+    </div>
+    <%= link_to 'Add Todo', new_todo_path, class: "inline-block rounded-lg bg-blue-600 px-5 py-2 text-white font-semibold shadow hover:bg-blue-700 transition" %>
+  </div>
+
+  <% if @total_count > 0 %>
+    <div class="mb-8">
+      <h2 class="text-xl font-semibold text-gray-800 mb-2">Pending Todos</h2>
+      <% if @pending_todos.any? %>
+        <ul class="divide-y divide-gray-200 bg-white rounded-lg shadow">
+          <% @pending_todos.each do |todo| %>
+            <li class="flex items-center px-4 py-4 hover:bg-gray-50 transition">
+              <%= form_with url: toggle_complete_todo_path(todo), method: :patch, local: true do |f| %>
+                <div class="flex items-center gap-3 w-full">
+                  <label class="cursor-pointer">
+                    <%= f.check_box :completed, checked: todo.completed, class: "h-5 w-5 text-green-600 rounded focus:ring-green-500", onchange: "this.form.submit();" %>
+                  </label>
+                  <%= link_to todo.title, todo_path(todo), class: "text-lg text-gray-800 hover:underline focus:outline-none" %>
+                </div>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <div class="text-center text-gray-400 py-8 bg-white rounded-lg shadow">
+          <p class="text-lg">No pending todos!</p>
+        </div>
+      <% end %>
+    </div>
+
+    <div>
+      <h2 class="text-xl font-semibold text-gray-800 mb-2">Completed Todos</h2>
+      <% if @completed_todos.any? %>
+        <ul class="divide-y divide-gray-200 bg-white rounded-lg shadow">
+          <% @completed_todos.each do |todo| %>
+            <li class="flex items-center px-4 py-4 hover:bg-gray-50 transition">
+              <%= form_with url: toggle_complete_todo_path(todo), method: :patch, local: true do |f| %>
+                <div class="flex items-center gap-3 w-full">
+                  <label class="cursor-pointer">
+                    <%= f.check_box :completed, checked: todo.completed, class: "h-5 w-5 text-green-600 rounded focus:ring-green-500", onchange: "this.form.submit();" %>
+                  </label>
+                  <%= link_to todo.title, todo_path(todo), class: "text-lg text-gray-400 line-through focus:outline-none" %>
+                </div>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <div class="text-center text-gray-400 py-8 bg-white rounded-lg shadow">
+          <p class="text-lg">No completed todos yet.</p>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="text-center text-gray-400 py-16 bg-white rounded-lg shadow">
+      <p class="text-lg">No todos yet. Click <span class="font-semibold text-blue-600">Add Todo</span> to get started!</p>
+    </div>
+  <% end %>
+</div>
