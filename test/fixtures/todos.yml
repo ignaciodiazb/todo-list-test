@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  description: MyText
+  title: Buy groceries
+  description: Milk, eggs, bread and fruits
   completed: false
-  estimated_time: 1
+  estimated_time: 30
 
 two:
-  title: MyString
-  description: MyText
-  completed: false
-  estimated_time: 1
+  title: Read a book
+  description: Finish reading 'The Great Gatsby'
+  completed: true
+  estimated_time: 60
