@@ -63,3 +63,5 @@ group :test do
 end
 
 gem "tailwindcss-rails", "~> 4.3"
+gem "dotenv-rails", "~> 3.1", ">= 3.1.7"
+gem "ruby-openai"

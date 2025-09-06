@@ -5,6 +5,8 @@ class TodosController < ApplicationController
   def create
     @todo = Todo.new(todo_params)
     if @todo.save
+      # Enqueue the job to estimate Todo duration
+      TodoEstimatedDurationJob.perform_later(@todo.id) if @todo.description.present?
       redirect_to @todo, notice: "Todo was successfully created."
     else
       render :new, status: :unprocessable_entity
