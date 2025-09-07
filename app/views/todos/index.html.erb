@@ -16,13 +16,17 @@
         <ul class="divide-y divide-gray-200 bg-white rounded-lg shadow">
           <% @pending_todos.each do |todo| %>
             <li class="flex items-center px-4 py-4 hover:bg-gray-50 transition">
-              <%= form_with url: toggle_complete_todo_path(todo), method: :patch, local: true do |f| %>
-                <div class="flex items-center gap-3 w-full">
-                  <label class="cursor-pointer">
-                    <%= f.check_box :completed, checked: todo.completed, class: "h-5 w-5 text-green-600 rounded focus:ring-green-500", onchange: "this.form.submit();" %>
-                  </label>
-                  <%= link_to todo.title, todo_path(todo), class: "text-lg text-gray-800 hover:underline focus:outline-none" %>
-                </div>
+              <%= form_with url: toggle_complete_todo_path(todo), method: :patch, local: true, class: "flex items-center gap-3 w-full" do |f| %>
+                <%= f.check_box :completed, checked: todo.completed,
+                    class: "h-5 w-5 text-green-600 rounded focus:ring-green-500 flex-shrink-0",
+                    onchange: "this.form.submit();",
+                    id: "todo_#{todo.id}_completed" %>
+                <%= f.label :completed, todo.title, 
+                    class: "flex-1 text-lg text-gray-800 cursor-pointer",
+                    for: "todo_#{todo.id}_completed" %>
+                <%= link_to "View", todo_path(todo),
+                    class: "inline-flex items-center px-3 py-1 text-sm font-medium text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 rounded flex-shrink-0",
+                    title: "View todo details" %>
               <% end %>
             </li>
           <% end %>
@@ -40,13 +44,17 @@
         <ul class="divide-y divide-gray-200 bg-white rounded-lg shadow">
           <% @completed_todos.each do |todo| %>
             <li class="flex items-center px-4 py-4 hover:bg-gray-50 transition">
-              <%= form_with url: toggle_complete_todo_path(todo), method: :patch, local: true do |f| %>
-                <div class="flex items-center gap-3 w-full">
-                  <label class="cursor-pointer">
-                    <%= f.check_box :completed, checked: todo.completed, class: "h-5 w-5 text-green-600 rounded focus:ring-green-500", onchange: "this.form.submit();" %>
-                  </label>
-                  <%= link_to todo.title, todo_path(todo), class: "text-lg text-gray-400 line-through focus:outline-none" %>
-                </div>
+              <%= form_with url: toggle_complete_todo_path(todo), method: :patch, local: true, class: "flex items-center gap-3 w-full" do |f| %>
+                <%= f.check_box :completed, checked: todo.completed,
+                    class: "h-5 w-5 text-green-600 rounded focus:ring-green-500 flex-shrink-0",
+                    onchange: "this.form.submit();",
+                    id: "todo_#{todo.id}_completed" %>
+                <%= f.label :completed, todo.title, 
+                    class: "flex-1 text-lg text-gray-400 line-through cursor-pointer",
+                    for: "todo_#{todo.id}_completed" %>
+                <%= link_to "View", todo_path(todo),
+                    class: "inline-flex items-center px-3 py-1 text-sm font-medium text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-1 rounded flex-shrink-0",
+                    title: "View todo details" %>
               <% end %>
             </li>
           <% end %>

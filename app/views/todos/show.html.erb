@@ -38,6 +38,11 @@
 			<% end %>
 		</div>
 
+		<div>
+			<span class="block text-sm font-medium text-gray-700 mb-1">Added by</span>
+			<span class="text-base text-gray-800"><%= @todo.user.email_address %></span>
+		</div>
+
 			<div class="flex items-center justify-between pt-6">
 				<div class="flex gap-3">
 					<%= link_to "Edit", edit_todo_path(@todo), class: "inline-block rounded-lg bg-blue-600 px-5 py-2 text-white font-semibold shadow hover:bg-blue-700 transition" %>
