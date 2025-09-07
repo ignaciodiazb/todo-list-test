@@ -5,9 +5,11 @@ one:
   description: Milk, eggs, bread and fruits
   completed: false
   estimated_time: 30
+  user: one
 
 two:
   title: Read a book
   description: Finish reading 'The Great Gatsby'
   completed: true
   estimated_time: 60
+  user: one
